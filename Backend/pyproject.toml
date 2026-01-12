@@ -1,0 +1,20 @@
+[project]
+name = "clinisight"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11.6"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "fastapi>=0.124.0",
+    "langchain>=1.1.2",
+    "langchain-community>=0.4.1",
+    "langchain-core>=1.1.1",
+    "langchain-groq>=1.1.0",
+    "langchain-mcp-adapters>=0.2.1",
+    "lxml>=6.0.2",
+    "mcp[cli]>=1.23.1",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
+    "uvicorn>=0.38.0",
+]
