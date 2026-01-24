@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
-groq_api_key=os.getenv('GROQ_API_KEY')
+groq_api_key = os.getenv("GROQ_API_KEY", "").strip().strip('"').strip("'")
 llm=ChatGroq(model='llama-3.1-8b-instant',api_key=groq_api_key)
 parser=StrOutputParser()
 

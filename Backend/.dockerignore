@@ -1,0 +1,11 @@
+.venv
+__pycache__
+*.pyc
+.env
+.git
+.gitignore
+README.md
+# Dockerfile and entrypoint.sh should NOT be ignored if they need to be copied
+# entrypoint.sh removed from ignore
+# (Keep uv.lock if you want guaranteed versions, but it's already copied specifically in Dockerfile)
+# uv.lock removed from ignore so Docker can use it

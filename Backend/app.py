@@ -24,10 +24,14 @@ load_dotenv()
 
 app = FastAPI()
 
+# Handle CORS
+frontend_url = os.getenv("FRONTEND_BASE_URL", "").strip().strip('"').strip("'")
+origins = [frontend_url] if frontend_url else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
-    allow_credentials=True,
+    allow_origins=origins,
+    allow_credentials=True if frontend_url else False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -43,7 +47,7 @@ class QueryInput(BaseModel):
 # =======================
 # LLM
 # =======================
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip().strip('"').strip("'")
 if not GROQ_API_KEY:
     raise RuntimeError("GROQ_API_KEY not set")
 
@@ -134,7 +138,8 @@ def _extract_from_message_obj(m):
 # Agent runner
 # =======================
 async def run_agent_with_query(user_message: str):
-    async with streamablehttp_client("http://localhost:8000/mcp") as (read, write, _):
+    api_url = os.getenv("API_URL", "http://localhost:8000").strip().strip('"').strip("'")
+    async with streamablehttp_client(f"{api_url}/mcp") as (read, write, _):
         async with ClientSession(read, write) as session:
             await session.initialize()
 

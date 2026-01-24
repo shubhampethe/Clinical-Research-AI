@@ -21,7 +21,9 @@ function App() {
     setResponse(null)
 
     try {
-      const res = await fetch('http://localhost:8080/diagnosis', {
+// ✅ Correct way to access it
+      const apiUrl ='http://ec2-3-108-196-32.ap-south-1.compute.amazonaws.com';
+      const res = await fetch(`${apiUrl}/diagnosis`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +73,7 @@ function App() {
           <div className="hero-icon">🩺</div>
           <h2>Your Health Assistant</h2>
           <p>Ask me anything about health, symptoms, medications, or wellness tips. I'm here to help you stay informed.</p>
-          
+
           <div className="feature-tags">
             <span className="tag">💚 Symptom Info</span>
             <span className="tag">💡 Health Tips</span>
@@ -90,8 +92,8 @@ function App() {
                 className="query-input"
                 disabled={loading}
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="submit-btn"
                 disabled={loading || !query.trim()}
               >
@@ -137,7 +139,7 @@ function App() {
                   )}
                 </div>
               </div>
-              
+
               <div className="response-section">
                 <h3>📚 Medical Summary</h3>
                 <div className="summary">

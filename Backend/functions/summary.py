@@ -7,7 +7,7 @@ from langchain_core.documents import Document
 import os 
 from dotenv import load_dotenv
 load_dotenv()
-groq_api_key=os.getenv('GROQ_API_KEY')
+groq_api_key = os.getenv("GROQ_API_KEY", "").strip().strip('"').strip("'")
 llm=ChatGroq(model='llama-3.1-8b-instant',api_key=groq_api_key)
 def extract_summary(articles):
     # Handle both string and list inputs
